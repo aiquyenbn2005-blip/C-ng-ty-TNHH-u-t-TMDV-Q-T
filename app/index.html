@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đọc Truyện Nội Bộ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="light" data-font="serif">
+  <header class="topbar">
+    <button id="btnToc" class="icon-btn" title="Mục lục" aria-label="Mục lục">☰</button>
+    <div class="story-title" id="storyTitle">Đang tải…</div>
+    <button id="btnSettings" class="icon-btn" title="Cài đặt đọc" aria-label="Cài đặt đọc">Aa</button>
+  </header>
+
+  <!-- Table of contents drawer -->
+  <aside id="tocDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <h2>Mục lục</h2>
+      <button id="closeToc" class="icon-btn" aria-label="Đóng">✕</button>
+    </div>
+    <input id="tocSearch" type="search" placeholder="Tìm chương…" class="toc-search" />
+    <ul id="tocList" class="toc-list"></ul>
+  </aside>
+
+  <!-- Reading settings drawer -->
+  <aside id="settingsDrawer" class="drawer drawer-right" aria-hidden="true">
+    <div class="drawer-header">
+      <h2>Cài đặt đọc</h2>
+      <button id="closeSettings" class="icon-btn" aria-label="Đóng">✕</button>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">Cỡ chữ</div>
+      <div class="setting-row">
+        <button id="fontDec" class="pill-btn" aria-label="Giảm cỡ chữ">A-</button>
+        <span id="fontSizeLabel" class="font-size-label">100%</span>
+        <button id="fontInc" class="pill-btn" aria-label="Tăng cỡ chữ">A+</button>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">Giãn dòng</div>
+      <div class="setting-row">
+        <button id="lineDec" class="pill-btn" aria-label="Giảm giãn dòng">−</button>
+        <span id="lineHeightLabel" class="font-size-label">1.8</span>
+        <button id="lineInc" class="pill-btn" aria-label="Tăng giãn dòng">+</button>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">Phông chữ</div>
+      <div class="setting-row font-choices">
+        <button class="choice-btn" data-font="serif">Chữ có chân</button>
+        <button class="choice-btn" data-font="sans">Chữ không chân</button>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">Chế độ đọc</div>
+      <div class="setting-row theme-choices">
+        <button class="theme-btn theme-light" data-theme="light" title="Sáng">Sáng</button>
+        <button class="theme-btn theme-sepia" data-theme="sepia" title="Vàng">Vàng</button>
+        <button class="theme-btn theme-dark" data-theme="dark" title="Tối">Tối</button>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">Độ rộng nội dung</div>
+      <div class="setting-row">
+        <button id="widthDec" class="pill-btn" aria-label="Thu hẹp">◄</button>
+        <span id="widthLabel" class="font-size-label">Vừa</span>
+        <button id="widthInc" class="pill-btn" aria-label="Mở rộng">►</button>
+      </div>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+  <main id="reader" class="reader">
+    <div class="chapter-progress-top">
+      <div id="progressBarTop" class="progress-bar-top"></div>
+    </div>
+
+    <article id="chapterContent" class="chapter-content">
+      <p class="loading">Đang tải nội dung truyện…</p>
+    </article>
+
+    <nav class="chapter-nav">
+      <button id="prevChapter" class="nav-btn">‹ Chương trước</button>
+      <span id="chapterPos" class="chapter-pos"></span>
+      <button id="nextChapter" class="nav-btn">Chương sau ›</button>
+    </nav>
+  </main>
+
+  <button id="resumeToast" class="resume-toast" hidden>
+    Tiếp tục đọc từ vị trí lần trước ↗
+  </button>
+
+  <script src="data/story-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
