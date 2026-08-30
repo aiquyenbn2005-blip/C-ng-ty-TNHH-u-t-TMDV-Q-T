@@ -48,7 +48,7 @@ def main():
     data = extract(docx_path)
 
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_path = os.path.join(repo_root, "app", "data", "story-data.js")
+    out_path = os.path.join(repo_root, "docs", "data", "story-data.js")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(

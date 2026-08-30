@@ -3,21 +3,31 @@
 ## App đọc truyện nội bộ — "Trung Thần"
 
 Ứng dụng web tĩnh (không cần build, không cần backend) để đọc truyện nội bộ,
-nằm trong thư mục [`app/`](app/).
+nằm trong thư mục [`docs/`](docs/) (đặt tên `docs` để GitHub Pages nhận diện
+sẵn, xem hướng dẫn bật bên dưới).
 
-### Chạy thử
+### Dùng trên điện thoại qua GitHub Pages (khuyên dùng)
 
-Cần chạy qua một server tĩnh (không mở trực tiếp file `index.html` bằng
-`file://`, vì trình duyệt sẽ chặn việc tải `data/story-data.js`):
+1. Vào repo trên GitHub → **Settings** → **Pages**.
+2. Ở **Build and deployment** → **Source**, chọn **Deploy from a branch**.
+3. Chọn nhánh đang chứa app này, thư mục **`/docs`**, bấm **Save**.
+4. Sau khoảng 1–2 phút, trang sẽ có ở
+   `https://<tên-tài-khoản>.github.io/<tên-repo>/` — mở link đó trên điện
+   thoại, dùng menu trình duyệt để "Thêm vào Màn hình chính" là dùng như app
+   thật.
+
+### Chạy thử trên máy tính
 
 ```bash
-cd app
+cd docs
 python3 -m http.server 8080
 # rồi mở http://localhost:8080
 ```
 
-Hoặc dùng bất kỳ static server nào khác (`npx serve app`, Nginx, v.v.) — chỉ
-cần trỏ root vào thư mục `app/`.
+Hoặc dùng bất kỳ static server nào khác (`npx serve docs`, Nginx, v.v.) — chỉ
+cần trỏ root vào thư mục `docs/`. Mở trực tiếp `docs/index.html` bằng
+`file://` cũng chạy được (không cần server) vì dữ liệu truyện được nạp qua
+thẻ `<script>` chứ không phải `fetch`.
 
 ### Tính năng
 
@@ -30,7 +40,7 @@ cần trỏ root vào thư mục `app/`.
 
 ### Cập nhật nội dung truyện
 
-Dữ liệu truyện được sinh sẵn tại `app/data/story-data.js` từ file `.docx`
+Dữ liệu truyện được sinh sẵn tại `docs/data/story-data.js` từ file `.docx`
 gốc. Nếu cần cập nhật/nạp lại từ một bản `.docx` khác:
 
 ```bash
