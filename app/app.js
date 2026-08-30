@@ -22,15 +22,20 @@
   var tocDrawer = document.getElementById("tocDrawer");
   var settingsDrawer = document.getElementById("settingsDrawer");
   var overlay = document.getElementById("overlay");
+  var themeColorMeta = document.getElementById("themeColorMeta");
+  var topbarEl = document.querySelector(".topbar");
 
   var WIDTHS = [32, 42, 54]; // rem, matches --content-width choices
+  var THEME_SURFACE_COLOR = { light: "#f4f4f4", sepia: "#ece0c4", dark: "#1f2227" };
 
   // ---- Persistence ----
   function loadState() {
+    var prefersDark =
+      window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     var defaults = {
       chapterId: 0,
       scrollFraction: 0,
-      theme: "light",
+      theme: prefersDark ? "dark" : "light",
       font: "serif",
       fontScale: 1,
       lineHeight: 1.8,
@@ -38,7 +43,7 @@
     };
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return defaults;
+      if (!raw) return defaults; // first run on this device — honor system dark mode
       var parsed = JSON.parse(raw);
       return Object.assign(defaults, parsed);
     } catch (e) {
@@ -156,6 +161,20 @@
     document.querySelectorAll(".theme-btn").forEach(function (b) {
       b.classList.toggle("active", b.dataset.theme === state.theme);
     });
+
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute(
+        "content",
+        THEME_SURFACE_COLOR[state.theme] || THEME_SURFACE_COLOR.light
+      );
+    }
+  }
+
+  // Keeps the sticky progress bar flush under the top bar, whose height
+  // varies by device (notch / punch-hole safe-area insets differ).
+  function syncTopbarHeight() {
+    if (!topbarEl) return;
+    document.documentElement.style.setProperty("--topbar-h", topbarEl.offsetHeight + "px");
   }
 
   function clamp(v, min, max) {
@@ -261,12 +280,15 @@
   });
 
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", syncTopbarHeight);
+  window.addEventListener("orientationchange", syncTopbarHeight);
 
   resumeToast.addEventListener("click", function () {
     resumeToast.hidden = true;
   });
 
   // ---- Init ----
+  syncTopbarHeight();
   renderChapter(true);
   if (state.chapterId > 0 || state.scrollFraction > 0) {
     resumeToast.hidden = false;

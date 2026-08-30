@@ -33,6 +33,13 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overscroll-behavior-y: contain;
 }
 
 html, body {
@@ -41,11 +48,18 @@ html, body {
   background: var(--bg);
   color: var(--fg);
   min-height: 100%;
+  min-height: 100dvh;
 }
 
 body {
   font-family: var(--font-body);
   transition: background 0.2s ease, color 0.2s ease;
+  overscroll-behavior-y: contain;
+}
+
+button {
+  font-family: inherit;
+  touch-action: manipulation;
 }
 
 .topbar {
@@ -56,7 +70,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  padding: 0.6rem 0.8rem;
+  padding: calc(0.6rem + env(safe-area-inset-top)) calc(0.8rem + env(safe-area-inset-right)) 0.6rem
+    calc(0.8rem + env(safe-area-inset-left));
   background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
@@ -77,11 +92,19 @@ body {
   background: var(--bg);
   color: var(--fg);
   border-radius: 8px;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.75rem;
+  height: 2.75rem;
   font-size: 1rem;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.icon-btn:active,
+.pill-btn:active,
+.choice-btn:active,
+.theme-btn:active,
+.nav-btn:active {
+  transform: scale(0.96);
 }
 
 .icon-btn:hover {
@@ -91,16 +114,17 @@ body {
 .reader {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 0.5rem 1.2rem 4rem;
+  padding: 0.5rem calc(1.2rem + env(safe-area-inset-right)) calc(4rem + env(safe-area-inset-bottom))
+    calc(1.2rem + env(safe-area-inset-left));
 }
 
 .chapter-progress-top {
   height: 3px;
   background: var(--border);
   position: sticky;
-  top: 3.6rem;
+  top: var(--topbar-h, 3.6rem);
   z-index: 15;
-  margin: 0 -1.2rem;
+  margin: 0 calc(-1.2rem - env(safe-area-inset-right)) 0 calc(-1.2rem - env(safe-area-inset-left));
 }
 
 .progress-bar-top {
@@ -146,7 +170,8 @@ body {
   background: var(--surface);
   color: var(--fg);
   border-radius: 8px;
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 1rem;
+  min-height: 2.75rem;
   font-size: 0.9rem;
   cursor: pointer;
   flex: 1;
@@ -189,6 +214,7 @@ body {
   bottom: 0;
   left: 0;
   width: min(20rem, 85vw);
+  height: 100dvh;
   background: var(--bg);
   color: var(--fg);
   border-right: 1px solid var(--border);
@@ -197,7 +223,9 @@ body {
   transition: transform 0.25s ease;
   display: flex;
   flex-direction: column;
-  padding: 0.8rem;
+  padding: calc(0.8rem + env(safe-area-inset-top)) calc(0.8rem + env(safe-area-inset-right))
+    calc(0.8rem + env(safe-area-inset-bottom)) calc(0.8rem + env(safe-area-inset-left));
+  overscroll-behavior: contain;
 }
 
 .drawer.open {
@@ -229,13 +257,14 @@ body {
 }
 
 .toc-search {
-  padding: 0.5rem 0.7rem;
+  padding: 0.6rem 0.7rem;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--fg);
   margin-bottom: 0.6rem;
-  font-size: 0.9rem;
+  /* 16px minimum keeps Chrome/Samsung Internet from auto-zooming in on focus */
+  font-size: 16px;
 }
 
 .toc-list {
@@ -256,7 +285,8 @@ body {
   background: none;
   border: none;
   color: var(--fg);
-  padding: 0.55rem 0.6rem;
+  padding: 0.7rem 0.6rem;
+  min-height: 2.75rem;
   font-size: 0.9rem;
   border-radius: 8px;
   cursor: pointer;
@@ -292,8 +322,8 @@ body {
   background: var(--surface);
   color: var(--fg);
   border-radius: 999px;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.75rem;
+  height: 2.75rem;
   font-size: 0.95rem;
   cursor: pointer;
 }
@@ -318,7 +348,8 @@ body {
   background: var(--surface);
   color: var(--fg);
   border-radius: 8px;
-  padding: 0.5rem 0.8rem;
+  padding: 0.6rem 0.9rem;
+  min-height: 2.75rem;
   font-size: 0.85rem;
   cursor: pointer;
 }
@@ -331,16 +362,18 @@ body {
 
 .resume-toast {
   position: fixed;
-  bottom: 1.2rem;
+  bottom: calc(1.2rem + env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
+  max-width: calc(100vw - 2.4rem);
   background: var(--accent);
   color: #fff;
   border: none;
   border-radius: 999px;
-  padding: 0.7rem 1.2rem;
+  padding: 0.8rem 1.3rem;
   font-size: 0.85rem;
   cursor: pointer;
+  touch-action: manipulation;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   z-index: 40;
 }
