@@ -7,17 +7,17 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Trung Thần" />
+  <meta name="apple-mobile-web-app-title" content="listbyme" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="icons/icon-192.png" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <title>Đọc Truyện Nội Bộ</title>
+  <title>listbyme</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-theme="light" data-font="serif">
   <header class="topbar">
     <button id="btnToc" class="icon-btn" title="Mục lục" aria-label="Mục lục">☰</button>
-    <div class="story-title" id="storyTitle">Đang tải…</div>
+    <div class="story-title" id="storyTitle">listbyme</div>
     <button id="btnSettings" class="icon-btn" title="Cài đặt đọc" aria-label="Cài đặt đọc">Aa</button>
   </header>
 
@@ -27,6 +27,7 @@
       <h2>Mục lục</h2>
       <button id="closeToc" class="icon-btn" aria-label="Đóng">✕</button>
     </div>
+    <button id="btnBackLibrary" class="back-library-btn">📚 Về thư viện</button>
     <input id="tocSearch" type="search" placeholder="Tìm chương…" class="toc-search" />
     <ul id="tocList" class="toc-list"></ul>
   </aside>
@@ -85,7 +86,22 @@
 
   <div id="overlay" class="overlay" aria-hidden="true"></div>
 
-  <main id="reader" class="reader">
+  <!-- Library / home screen: pick which story to read -->
+  <main id="library" class="library">
+    <button id="continueCard" class="continue-card" hidden>
+      <div class="continue-label">Tiếp tục đọc</div>
+      <div id="continueTitle" class="continue-title"></div>
+      <div id="continueSub" class="continue-sub"></div>
+    </button>
+
+    <h1 class="library-heading">Thư viện truyện</h1>
+    <div id="libraryList" class="library-list">
+      <p class="loading">Đang tải danh sách truyện…</p>
+    </div>
+  </main>
+
+  <!-- Reader screen: one story's chapter content -->
+  <main id="reader" class="reader" hidden>
     <div class="chapter-progress-top">
       <div id="progressBarTop" class="progress-bar-top"></div>
     </div>
@@ -105,7 +121,11 @@
     Tiếp tục đọc từ vị trí lần trước ↗
   </button>
 
-  <script src="data/story-data.js"></script>
+  <!-- Story data — one <script> per story. Add new lines here (kept between
+       the markers below) when running scripts/extract_docx.py on a new book. -->
+  <!-- STORY_SCRIPTS_START -->
+  <script src="data/story-trung-than.js"></script>
+  <!-- STORY_SCRIPTS_END -->
   <script src="app.js"></script>
 </body>
 </html>

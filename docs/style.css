@@ -118,6 +118,118 @@ button {
     calc(1.2rem + env(safe-area-inset-left));
 }
 
+/* Library / home screen */
+.library {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1rem calc(1.2rem + env(safe-area-inset-right)) calc(3rem + env(safe-area-inset-bottom))
+    calc(1.2rem + env(safe-area-inset-left));
+}
+
+body.view-library #btnToc {
+  visibility: hidden;
+}
+
+.continue-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.4rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.continue-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+  margin-bottom: 0.2rem;
+}
+
+.continue-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.continue-sub {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.library-heading {
+  font-size: 1.1rem;
+  margin: 0 0 0.8rem;
+  color: var(--fg);
+}
+
+.library-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.library-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.library-card:active {
+  transform: scale(0.99);
+}
+
+.library-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.library-card-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.library-card-progress {
+  margin-top: 0.5rem;
+  height: 4px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.library-card-progress-fill {
+  height: 100%;
+  background: var(--accent);
+}
+
+.back-library-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.7rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
 .chapter-progress-top {
   height: 3px;
   background: var(--border);

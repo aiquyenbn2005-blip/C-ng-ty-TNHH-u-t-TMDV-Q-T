@@ -1,7 +1,7 @@
 {
-  "name": "Trung Thần — Đọc truyện nội bộ",
-  "short_name": "Trung Thần",
-  "description": "App đọc truyện nội bộ, hỗ trợ phóng to chữ, đổi chế độ đọc và ghi nhớ vị trí đọc cuối.",
+  "name": "listbyme — Đọc truyện nội bộ",
+  "short_name": "listbyme",
+  "description": "Thư viện truyện đọc nội bộ, hỗ trợ nhiều truyện, phóng to chữ, đổi chế độ đọc và ghi nhớ vị trí đọc cuối của từng truyện.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
