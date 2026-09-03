@@ -78,8 +78,10 @@ def register_script_tag(repo_root, story_id):
     end_marker = "<!-- STORY_SCRIPTS_END -->"
     start = html.index(start_marker) + len(start_marker)
     end = html.index(end_marker)
-    block = html[start:end]
-    html = html[:start] + block + tag + "\n" + html[end:]
+    existing_tags = [line.strip() for line in html[start:end].splitlines() if line.strip()]
+    existing_tags.append(tag.strip())
+    block = "\n" + "\n".join("  " + t for t in existing_tags) + "\n  "
+    html = html[:start] + block + html[end:]
 
     with open(index_path, "w", encoding="utf-8") as f:
         f.write(html)
